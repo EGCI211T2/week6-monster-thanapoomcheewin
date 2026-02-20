@@ -1,21 +1,41 @@
 #include <iostream>
+#include "monster.h"
+#include "thanos.h"
+
 using namespace std;
 
-#include "monster.h"
+int main() {
 
-int main(int argc, char* argv[]) {
+    Thanos T;   // default: 0 stones, 1000 hp
 
-    monster A;
-  /*
- 
- monster *p,x;
-  p=&x;
-  p=new monster;
- delete p;
+    int n;
+    cout << "How many monsters? ";
+    cin >> n;
 
- p=new monster[3];
- delete []p;
+    // Make sure hp not 0 at start
+    monster *m = new monster[n];
 
-*/
+    cout << "\nThe battlefield is ready...\n";
+    cout << "Thanos begins collecting stones...\n\n";
 
+    ++T;
+    ++T;
+    T.snap_finger(m, n);
+
+    ++T;
+    ++T;
+    T.snap_finger(m, n);
+
+    ++T;
+    ++T;   // Now stones = 6
+    T.snap_finger(m, n);   // Kill n/2 monsters
+
+    cout << "\nRemaining monsters:\n";
+
+    for(int i = 0; i < n; i++)
+        m[i].display();   // Only alive ones show
+
+    delete [] m;   // Prevent memory leak
+
+    return 0;
 }
