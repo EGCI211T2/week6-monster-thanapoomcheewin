@@ -1,8 +1,8 @@
 #ifndef THANOS_H
 #define THANOS_H
 
-#include "monster.h"
 #include <iostream>
+#include "monster.h"
 using namespace std;
 
 class Thanos {
@@ -11,43 +11,46 @@ private:
     int hp;
 
 public:
-    // Constructor
-    Thanos(int s = 0, int h = 1000) {
+
+   
+    Thanos(int s=0, int h=1000){
         stones = s;
         hp = h;
     }
 
-    // Destructor
-    ~Thanos() {
-        cout << "Thanos disappears...\n";
+   
+    ~Thanos(){
+        cout << "Thanos has left the universe...\n";
     }
 
-    // Increase stones
-    void operator++() {
-        if (stones < 6)
+    
+    void operator++(){
+        if(stones < 6)
             stones++;
-        cout << "Stones: " << stones << endl;
+
+        cout << "Thanos now has " << stones << " stones.\n";
     }
 
-    // Snap finger
-    void snap_finger(monster m[], int n) {
+    
+    void snap_finger(monster m[], int n){
 
-        cout << "Thanos snaps his finger...\n";
+        cout << "Thanos snaps his fingers...\n";
 
-        if (stones == 6) {
+       
+        for(int i=0;i<n;i++)
+            m[i].display();
 
-            int kill = n / 2;
+        if(stones == 6){
 
-            for (int i = 0; i < kill; i++) {
-                // Make hp = 0
-                m[i].Attack(m[i]);  
-                // Self attack trick assuming Attack reduces hp
-            }
+            int half = n/2;
 
-            cout << kill << " monsters vanished.\n";
+            for(int i=0;i<half;i++)
+                m[i].kill();   
+
+            cout << half << " monsters vanished!\n";
         }
-        else {
-            cout << "Not enough stones!\n";
+        else{
+            cout << "Nothing happens... Need 6 stones.\n";
         }
     }
 };
